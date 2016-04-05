@@ -1,0 +1,6 @@
+/.vs/EclipseKey/v14/*.suo
+/.vs
+/packages
+/EclipseKey/bin
+/EclipseKey/obj
+/*.suo
