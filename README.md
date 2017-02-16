@@ -46,6 +46,7 @@ EclipseKey 主要提供了以下功能：
 因而输入的过程中双手不需要离开键盘主区域去寻找箭头按键，以提高输入效率。
 
 成对输入目前支持：
+
  * (: (|)
  * [: [|]
  * ': '|'
@@ -62,6 +63,7 @@ EclipseKey 主要提供了以下功能：
 极大的影响录入的效率。
 
 智能分号功能即对分号键进行智能处理：
+
  * 如果在一行的中间位置输入分号，则分号会被添加到这一行的最后，并且输入光标移动到分号之后
  * 如果这一行的最后已经有一个分号了，则不会重复的添加分号，只是将输入光标移动到分号之后
  * 如果需要在光标所在位置输入一个分号，也很简单，连续按两次分号键，
@@ -72,13 +74,13 @@ EclipseKey 主要提供了以下功能：
 Console.WriteLine("Hello world;");
 这样一行代码，代码录入的过程大致为：(|表示光标位置）
 
-Console.WriteLine|                         -- 
-Console.WriteLine(|)                       -- 左右括号成对输入
-Console.WriteLine("|")					   -- 输入成对的引号
-Console.WriteLine("Hello world|")		   -- 在引号内输入字符串内容
-Console.WriteLine("Hello world");|		   -- 字符串结尾的分号，按下分号键以后分号智能跳到行未去了，并没有插入到字符串中
-Console.WriteLine("Hello world;|")		   -- 再按一下分号键，分号又回到了字符串中，行尾的分号不见了
-Console.WriteLine("Hello world;");|        -- 结束整行代码，按一下分号键，智能跳到行尾添加了一个分号
+    Console.WriteLine|                       -- 
+    Console.WriteLine(|)                     -- 左右括号成对输入
+    Console.WriteLine("|")					   -- 输入成对的引号
+    Console.WriteLine("Hello world|")		   -- 在引号内输入字符串内容
+    Console.WriteLine("Hello world");|		   -- 字符串结尾的分号，按下分号键以后分号智能跳到行未去了，并没有插入到字符串中
+    Console.WriteLine("Hello world;|")		   -- 再按一下分号键，分号又回到了字符串中，行尾的分号不见了
+    Console.WriteLine("Hello world;");|      -- 结束整行代码，按一下分号键，智能跳到行尾添加了一个分号
 
 
 ## Surround With

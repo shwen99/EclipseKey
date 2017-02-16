@@ -21,9 +21,8 @@
   <Extern href="vsshlids.h"/>
 
   <!--Definition of some VSCT specific constants. In this sample we use it for the IDs inside the guidOfficeIcon group. -->
+  <!-- the following line should be removed on VS2015 -->
   <Extern href="msobtnid.h"/>
-
-
 
 
   <!--The Commands section is where we the commands, menus and menu groups are defined.
@@ -37,6 +36,17 @@
     group; your package should define its own command set in order to avoid collisions  
     with command ids defined by other packages. -->
 
+    <!--
+    <Menus>
+      <Menu guid="guidEclipseKeyMenu" id="EclipseKeyMenu" priority="0x0600" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
+        <Strings>
+          <MenuText>EclipseKey</MenuText>
+          <ButtonText>EclipseKey</ButtonText>
+        </Strings>
+      </Menu>
+    </Menus>
+    -->
     
     <!-- In this section you can define new menu groups. A menu group is a container for 
          other menus or buttons (commands); from a visual point of view you can see the 
@@ -45,6 +55,7 @@
     <Groups>
 
       <Group guid="guidEclipseKeyCmdSet" id="EclipseKey" priority="0x0600">
+        <!--<Parent guid="guidEclipseKeyMenu" id="EclipseKeyMenu"/>-->
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
       </Group>
     </Groups>
@@ -89,7 +100,7 @@
         <Icon guid="guidImages" id="bmpPic1" />
         <CommandFlag>CommandWellOnly</CommandFlag>
         <Strings>
-          <ButtonText>ToggleComments</ButtonText>
+          <ButtonText>CommentLines</ButtonText>
         </Strings>
       </Button>
       <Button guid="guidEclipseKeyCmdSet" id="cmdidCopyLinesDown" priority="0x0100" type="Button">
@@ -147,6 +158,12 @@
       <IDSymbol value="4134" name="cmdidCopyLinesDown" />
       <IDSymbol value="4135" name="cmdidCopyLinesUp" />
     </GuidSymbol>
+
+    <!--
+    <GuidSymbol name="guidEclipseKeyMenu" value="{5332E494-5E9E-455C-8439-BA17532B98B5}">
+      <IDSymbol name="EclipseKeyMenu" value="1"/>  
+    </GuidSymbol>
+    -->
     
     <GuidSymbol name="guidImages" value="{1833178a-2199-493c-b4ba-27d326348492}" >
       <IDSymbol name="bmpPic1" value="1" />
