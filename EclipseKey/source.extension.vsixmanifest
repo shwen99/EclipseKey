@@ -3,11 +3,12 @@
   <Identifier Id="58b3fb67-11d2-4750-84c3-125ce2f76d6b">
     <Name>EclipseKey</Name>
     <Author>Jumbo Shwen</Author>
-    <Version>1.0</Version>
+    <Version>1.0.170317</Version>
     <Description xml:space="preserve">Some Eclipse shutcuts for VS2010  and above</Description>
     <Locale>1033</Locale>
     <MoreInfoUrl>https://github.com/shwen99/EclipseKey</MoreInfoUrl>
     <GettingStartedGuide>https://github.com/shwen99/EclipseKey</GettingStartedGuide>
+    <Icon>Package.png</Icon>
     <InstalledByMsi>false</InstalledByMsi>
     <SupportedProducts>
       <VisualStudio Version="10.0">
@@ -40,14 +41,16 @@
         <Edition>Pro</Edition>
         <Edition>Express_All</Edition>
       </VisualStudio>
+<!--
       <VisualStudio Version="15.0">
         <Edition>Ultimate</Edition>
         <Edition>Premium</Edition>
         <Edition>Pro</Edition>
         <Edition>Express_All</Edition>
       </VisualStudio>
+-->
     </SupportedProducts>
-    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.5" />
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.6" />
   </Identifier>
   <References>
     <Reference Id="Microsoft.VisualStudio.MPF" MinVersion="10.0">

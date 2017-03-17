@@ -139,7 +139,6 @@ namespace EclipseKey
             selection.GotoLine(lineno);
             selection.MoveToLineAndOffset(lineno + lineCount, 1, true);
             
-            var sr = new StringReader(selection.Text);
             var lines = selection.Text.Lines().Select(l => new CodeLine(l)).ToList();
 
             var isCommented = lines.All(s => s.IsCommented(commentStartChar));

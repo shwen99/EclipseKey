@@ -84,6 +84,11 @@ namespace EclipseKey
 
                 if (option.SmartSemicolon) _keyBeforeHandlers.Add(new SmartSemicolon());
 
+                if (option.SmartKeyTemplates != null && option.SmartKeyTemplates.Count > 0)
+                {
+                    _keyBeforeHandlers.Add(new SmartKey(option.SmartKeyTemplates.ToArray()));
+                }
+
                 if (option.单引号自动补全) _keyBeforeHandlers.Add(new AutoPair("'", "''", -1));
                 if (option.双引号自动补全) _keyBeforeHandlers.Add(new AutoPair("\"", "\"\"", -1));
                 if (option.圆括号自动补全) _keyBeforeHandlers.Add(new AutoPair("(", "()", -1));

@@ -24,5 +24,8 @@ namespace EclipseKey
 
         [XmlArrayItem("Template")]
         public List<SurroundTemplate> SurroundTemplates { get; set; }
+
+        [XmlArrayItem("SmartKey")]
+        public List<SmartKeyTemplate> SmartKeyTemplates { get; set; } 
     }
 }
