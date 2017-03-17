@@ -82,6 +82,13 @@ Console.WriteLine("Hello world;");
     Console.WriteLine("Hello world;|")		   -- 再按一下分号键，分号又回到了字符串中，行尾的分号不见了
     Console.WriteLine("Hello world;");|      -- 结束整行代码，按一下分号键，智能跳到行尾添加了一个分号
 
+## 快速键入
+
+在 CSharp 代码中，有一些经常输入的符号按键不是很顺畅，例如 != =>
+
+ * 惊叹号的位置在左上角，而等号位置在右上角，惊叹号还需要和 shift 键组合，导致输入 != 很麻烦。相比之下，不论是输入 1= 还是 <> 都要顺畅的多。
+ * 同样输入 => 时也需要 shift 组合键，因此输入 === 或者 >>> 都要顺畅很多。
+ * 这些自动的按键替换，可以在 EclipseKey.dll.config 配置文件中根据自己的需要或爱好修改。
 
 ## Surround With
 
