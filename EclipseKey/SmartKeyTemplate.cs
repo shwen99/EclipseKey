@@ -7,12 +7,23 @@
 //  - yyyy-mm-dd by Author[<@email>] : brief
 // ****************************************************************************
 
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace EclipseKey
 {
     public class SmartKeyTemplate
     {
+        private string _fileType;
+
+        [DefaultValue(null)]
+        [XmlAttribute]
+        public string FileType
+        {
+            get { return _fileType; }
+            set { _fileType = value == null ? string.Empty : value.ToLower(); }
+        }
+
         [XmlAttribute]
         public string Key { get; set; }
 

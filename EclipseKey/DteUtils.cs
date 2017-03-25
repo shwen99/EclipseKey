@@ -90,6 +90,11 @@ namespace EclipseKey
                 line2 += 1;
             }
 
+            if (line2 > selection.Parent.EndPoint.Line)
+            {
+                selection.Parent.EndPoint.CreateEditPoint().Insert("\r\n");
+            }
+
             selection.GotoLine(line1);
             selection.MoveToLineAndOffset(line2, 1, true);
         }

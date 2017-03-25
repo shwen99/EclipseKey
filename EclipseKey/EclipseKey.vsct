@@ -119,6 +119,14 @@
           <ButtonText>CopyLinesUp</ButtonText>
         </Strings>
       </Button>
+      <Button guid="guidEclipseKeyCmdSet" id="cmdidPasteImage" priority="0x0100" type="Button">
+        <Parent guid="guidEclipseKeyCmdSet" id="EclipseKey" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <CommandFlag>CommandWellOnly</CommandFlag>
+        <Strings>
+          <ButtonText>PasteImage</ButtonText>
+        </Strings>
+      </Button>
     </Buttons>
    
     <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
@@ -141,6 +149,7 @@
     <KeyBinding guid="guidEclipseKeyCmdSet" id="cmdidCopyLinesDown" editor="GUID_TextEditorFactory" mod1="CONTROL ALT" key1="VK_DOWN"></KeyBinding>
     <KeyBinding guid="guidEclipseKeyCmdSet" id="cmdidCopyLinesUp" editor="GUID_TextEditorFactory" mod1="CONTROL ALT" key1="VK_UP"></KeyBinding>
     <KeyBinding guid="guidEclipseKeyCmdSet" id="cmdidToggleComments" editor="GUID_TextEditorFactory" mod1="CONTROL" key1="VK_DIVIDE"></KeyBinding>
+    <!--<KeyBinding guid="guidEclipseKeyCmdSet" id="cmdidPasteImage" editor="GUID_TextEditorFactory" mod1="CONTROL" key1="g"></KeyBinding>-->
   </KeyBindings>
 
   <Symbols>
@@ -157,6 +166,7 @@
       <IDSymbol value="4133" name="cmdidToggleComments" />
       <IDSymbol value="4134" name="cmdidCopyLinesDown" />
       <IDSymbol value="4135" name="cmdidCopyLinesUp" />
+      <IDSymbol value="4136" name="cmdidPasteImage" />
     </GuidSymbol>
 
     <!--

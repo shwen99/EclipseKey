@@ -8,10 +8,11 @@
 // ****************************************************************************
 
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
+using System.Linq;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.VisualStudio.Shell;
 
 namespace EclipseKey
 {
@@ -20,47 +21,116 @@ namespace EclipseKey
         /// <summary>
         /// 初始化 <see cref="T:System.Object"/> 类的新实例。
         /// </summary>
-        public SmartKey(SmartKeyTemplate[] keys)
+        public SmartKey(SmartKeyTemplate[] keys, Package package)
         {
-            _keys = keys;
+            _commonTemplates = keys.Where(t => string.IsNullOrEmpty(t.FileType)).ToArray();
+
+            _fileTemplates = keys.Where(t => !string.IsNullOrEmpty(t.FileType))
+                .GroupBy(t => t.FileType)
+                .Select(g => new KeyValuePair<string, SmartKeyTemplate[]>(g.Key, g.ToArray()))
+                .ToArray();
+
+            _package = package;
         }
 
         public DTE2 DTE { get; set; }
 
-        private readonly SmartKeyTemplate[] _keys;
+        private readonly KeyValuePair<string, SmartKeyTemplate[]>[] _fileTemplates;
+        private readonly SmartKeyTemplate[] _commonTemplates;
+
+        /// <summary>
+        /// VS Package that provides this command, not null.
+        /// </summary>
+        private readonly Package _package;
+
+        /// <summary>
+        /// Gets the service provider from the owner package.
+        /// </summary>
+        private IServiceProvider ServiceProvider { get { return _package; } }
 
         /// <summary>
         /// 当前已匹配的部分
         /// </summary>
         private string _match = string.Empty;
 
+        /// <summary>
+        /// 当前已匹配的部分对应的文档及位置
+        /// </summary>
+        private string _lastDocument;
+        private int _lastCharOffset;
+
         public bool BeforeKeyPress(string key, TextSelection selection, bool inStatementCompletion, ref bool cancelKeyPress)
         {
-            for (int i = 0; i < _keys.Length; i++)
-            {
-                var template = _keys[i].Key;
+           var filename = selection.Parent.Parent.Name.ToLower();
 
-                if (template.Length == _match.Length + 1 && key[0] == template[_match.Length] && template.StartsWith(_match))
+            if (!selection.IsEmpty || selection.ActivePoint.AbsoluteCharOffset != _lastCharOffset + 1 || _lastDocument != filename)
+            {
+                ClearMatch();
+            }
+
+            if (_match.Length > 0)
+            {
+                foreach (var template in GetTemplatesOfFile(filename))
                 {
-                    cancelKeyPress = Apply(selection, _keys[i].Value);
-                    _match = string.Empty;
-                    return true;
+                    var templateKey = template.Key;
+
+                    if (templateKey.Length == _match.Length + 1 && key[0] == templateKey[_match.Length] && templateKey.StartsWith(_match))
+                    {
+                        cancelKeyPress = Apply(selection, template.Value);
+                        ClearMatch();
+                        return true;
+                    }
                 }
             }
 
             _match += key;
 
-            for (int i = 0; i < _keys.Length; i++)
+            foreach (var template in GetTemplatesOfFile(filename))
             {
-                if (_keys[i].Key.StartsWith(_match))
-                {
-                    return true;
-                }
+                if (!template.Key.StartsWith(_match)) continue;
+
+                _lastDocument = filename;
+                _lastCharOffset = selection.ActivePoint.AbsoluteCharOffset;
+                return true;
             }
 
-            _match = String.Empty;
+            ClearMatch();
 
             return false;
+        }
+
+        private IEnumerable<SmartKeyTemplate> GetTemplatesOfFile(string filename)
+        {
+            for (int i = 0; i < _commonTemplates.Length; i++)
+            {
+                yield return _commonTemplates[i];
+            }
+
+            for (int i = 0; i < _fileTemplates.Length; i++)
+            {
+                var group = _fileTemplates[i];
+                if (filename.EndsWith(group.Key))
+                {
+                    var templates = @group.Value;
+
+                    for (int j = 0; j < templates.Length; j++)
+                    {
+                        yield return templates[i];
+                    }
+                }
+            }
+        } 
+
+        private static bool FileTypeMatch(string filename, string filetype)
+        {
+            return string.IsNullOrEmpty(filetype) || filename.EndsWith(filetype);
+        }
+
+        private void ClearMatch()
+        {
+            _match = String.Empty;
+            _lastDocument = null;
+            _lastCharOffset = 0;
         }
 
         private bool Apply(TextSelection selection, string value)
@@ -75,8 +145,10 @@ namespace EclipseKey
 
             selection.Insert(value, (int) vsInsertFlags.vsInsertFlagsContainNewText);
             selection.CharRight(false);
-
+            
             return true;
         }
+
+
     }
 }

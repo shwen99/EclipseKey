@@ -114,12 +114,19 @@
     <Compile Include="CopyLinesUp.cs" />
     <Compile Include="DeleteLines.cs" />
     <Compile Include="DteUtils.cs" />
+    <Compile Include="GetImageFilenameDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GetImageFilenameDialog.Designer.cs">
+      <DependentUpon>GetImageFilenameDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Guids.cs" />
     <Compile Include="IAfterKeyHandler.cs" />
     <Compile Include="IBeforeKeyHandler.cs" />
     <Compile Include="MoveLinesDown.cs" />
     <Compile Include="MoveLinesUp.cs" />
     <Compile Include="Option.cs" />
+    <Compile Include="PasteImage.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -137,6 +144,9 @@
     <Compile Include="ToggleComments.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GetImageFilenameDialog.resx">
+      <DependentUpon>GetImageFilenameDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

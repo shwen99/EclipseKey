@@ -66,6 +66,7 @@ namespace EclipseKey
             ToggleComments.Initialize(this);
             CopyLinesDown.Initialize(this);
             CopyLinesUp.Initialize(this);
+            PasteImage.Initialize(this);
             RegisterHandler();
         }
         #endregion
@@ -86,7 +87,7 @@ namespace EclipseKey
 
                 if (option.SmartKeyTemplates != null && option.SmartKeyTemplates.Count > 0)
                 {
-                    _keyBeforeHandlers.Add(new SmartKey(option.SmartKeyTemplates.ToArray()));
+                    _keyBeforeHandlers.Add(new SmartKey(option.SmartKeyTemplates.ToArray(), this));
                 }
 
                 if (option.单引号自动补全) _keyBeforeHandlers.Add(new AutoPair("'", "''", -1));
